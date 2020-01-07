@@ -15,12 +15,15 @@ export class AddTodo extends Component {
 			this.props.addTodo(this.state.title)
 			this.setState({ title: "" })
 		}
+		const input = document.getElementById("inputField")
+		input.focus()
+		input.value = ""
 	}
 
 	render() {
 		return (
 			<form onSubmit={this.onSubmit}>
-				<input type="text" placeholder="Add Todo..." onChange={this.onChange} />
+				<input id="inputField" type="text" placeholder="Add Todo..." onChange={this.onChange} />
 				<input type="submit" value="Submit" />
 				<button onClick={this.props.clearTodos}>Clear All</button>
 			</form>

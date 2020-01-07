@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 
-import Todos from "./Todos"
-import AddTodo from "./AddTodo"
-import Header from "./Header"
-
-import 'bootstrap/dist/css/bootstrap.min.css'
+import Todos from "./components/todos/Todos"
+import AddTodo from "./components/layout/AddTodo"
+import Header from "./components/layout/Header"
+import Footer from "./components/layout/Footer"
+// import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 
 class App extends Component {
   constructor() {
     super()
+    // Recupero i vecchi todos dal localstorage
     const prev_state = JSON.parse(localStorage.getItem('todos'))
-
+    // Default state
     this.state = {
       todos: [
         {
@@ -31,16 +32,19 @@ class App extends Component {
         }
       ]
     }
+    // Se ci sono li sostituisco allo state di default
     if (prev_state) {
       this.state.todos = prev_state
     }
   }
 
-  componentDidUpdate(prevProps) {
+  // Ogni volta che lo state riceve un cambiamento lo salvo su disco
+  // NB: Viene codificato in JSON per rappresentare un array
+  componentDidUpdate() {
     localStorage.setItem('todos', JSON.stringify(this.state.todos))
   }
 
-
+  // Dato un id questa funzione esclude quell'elemento dalla lista
   deleteTodo = (id) => {
     this.setState({
       todos: this.state.todos.filter(todo =>
@@ -49,6 +53,7 @@ class App extends Component {
     })
   }
 
+  // Dato un id questa funzione rende "completed" il corretto todo
   toggleTodo = (id) => {
     this.setState({
       todos: this.state.todos.map(todo => {
@@ -66,14 +71,16 @@ class App extends Component {
       title: title,
       completed: false
     }
+    // "...this.state.todos" significano che nel nuovo array saranno presenti tutti gli elementi precedenti
+    // a cui poi verrà aggiunto l'elemento newTodo
     this.setState({
       todos: [...this.state.todos, newTodo]
     })
   }
 
   clearTodos = () => {
-    this.setState({ todos: [] })
     localStorage.clear();
+    this.setState({ todos: [] })
   }
 
   render() {
@@ -86,6 +93,7 @@ class App extends Component {
           deleteTodo={this.deleteTodo}
           toggleTodo={this.toggleTodo}
         />
+        <Footer />
       </div>
     );
   }

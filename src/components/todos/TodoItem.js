@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 export class TodoItem extends Component {
+	// Questa funzione controlla se il todo è markato come completato, e di conseguenza gli applica il corretto stile
 	getStyle = () => {
 		return {
 			textDecoration: this.props.todo.completed ? "line-through" : "none"
@@ -8,13 +9,15 @@ export class TodoItem extends Component {
 	}
 
 	render() {
-		const { id, title } = this.props.todo
+		// Questa operazione estrae i seguenti parametri dall'object todo
+		// Viene definito "destructuring"
+		const { id, title, completed } = this.props.todo
 		return (
 			<div style={this.getStyle()}>
 				<p>
 					<input
 						type="checkbox"
-						defaultChecked={this.props.todo.completed}
+						defaultChecked={completed}
 						onChange={this.props.toggleTodo.bind(this, id)}
 					/>
 					{title}
