@@ -4,8 +4,8 @@ import Todos from "./components/todos/Todos"
 import AddTodo from "./components/layout/AddTodo"
 import Header from "./components/layout/Header"
 import Footer from "./components/layout/Footer"
-// import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   constructor() {
@@ -86,6 +86,7 @@ class App extends Component {
   render() {
     return (
       <div className="App" >
+
         <Header />
         <AddTodo addTodo={this.addTodo} clearTodos={this.clearTodos} />
         <Todos

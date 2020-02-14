@@ -4,7 +4,10 @@ export class TodoItem extends Component {
 	// Questa funzione controlla se il todo è markato come completato, e di conseguenza gli applica il corretto stile
 	getStyle = () => {
 		return {
-			textDecoration: this.props.todo.completed ? "line-through" : "none"
+			background: '#f4f4f4',
+			padding: '8px',
+			borderBottom: '1px #ccc dotted',
+			textDecoration: this.props.todo.completed ? 'line-through' : 'none'
 		}
 	}
 
@@ -19,13 +22,23 @@ export class TodoItem extends Component {
 						type="checkbox"
 						defaultChecked={completed}
 						onChange={this.props.toggleTodo.bind(this, id)}
-					/>
+					/> {' '}
 					{title}
-					<button onClick={this.props.deleteTodo.bind(this, id)}>X</button>
+					<button onClick={this.props.deleteTodo.bind(this, id)} style={btnStyle}>x</button>
 				</p>
 			</div>
 		)
 	}
+}
+
+const btnStyle = {
+	background: '#ff0000',
+	color: '#fff',
+	border: 'none',
+	padding: '5px 10px',
+	borderRadius: '50%',
+	cursor: 'pointer',
+	float: 'right'
 }
 
 export default TodoItem
